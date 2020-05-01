@@ -11,5 +11,8 @@ public interface UserDao {
     public List<User> getAllUser();
     public void updateUser(User user);
     public void deleteUser(long id);
+    public  List<User> getAllStudents();
+    public List<User> getAllAccountants();
+    public List<User> getAdmin();
 
 }

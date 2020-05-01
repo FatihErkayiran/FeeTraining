@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping()
-    public List<User> getAllStudent(){ return userDao.getAllUser(); }
+    public List<User> getAllUser(){ return userDao.getAllUser(); }
 
     @PutMapping()
     public void updateUser(@RequestBody  User user){
@@ -37,6 +37,15 @@ public class UserController {
     public void deleteUser(@PathVariable("id") long id){
         userDao.deleteUser(id);
     }
+
+    @GetMapping("/students")
+    public List<User> getAllStudents(){return userDao.getAllStudents();}
+
+    @GetMapping("/accountants")
+    public List<User> getAllAccountants(){return userDao.getAllAccountants();}
+
+    @GetMapping("/admin")
+    public List<User> getAdmin(){return userDao.getAdmin();}
 }
 
 
