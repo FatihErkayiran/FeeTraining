@@ -1,18 +1,17 @@
-package com.Management.feeTraining.Entities;
+package com.Management.feeTraining.DTO;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.Management.feeTraining.Entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+//@JsonIgnoreProperties(value={"user"})
+public class StudentDTO {
 
-@Entity
-@Table(name = "student")
-@JsonIgnoreProperties(value= {"roles"})
-public class Student {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long student_id;
     private String student_name;
     private String student_course;
@@ -21,25 +20,22 @@ public class Student {
     private int student_due;
     private String student_address;
     private String student_contact;
-
-
-
-
-
-    @JsonIgnore
-    @JsonBackReference
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    private long user_id;
     private User user;
 
+    public long getUser_id() {
+        return user_id;
+    }
 
+    public void setUser_id(long user_id) {
+        this.user_id = user_id;
 
+    }
 
-//
-//    public User getUser() {
-//        return user;
-//    }
-//
+    public User getUser() {
+        return user;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -96,7 +92,9 @@ public class Student {
         return student_contact;
     }
 
-    public void setStudent_contact(String student_contact) { this.student_contact = student_contact; }
+    public void setStudent_contact(String student_contact) {
+        this.student_contact = student_contact;
+    }
 
     public String getStudent_name() {
         return student_name;
@@ -105,8 +103,5 @@ public class Student {
     public void setStudent_name(String student_name) {
         this.student_name = student_name;
     }
-
-
-
 
 }

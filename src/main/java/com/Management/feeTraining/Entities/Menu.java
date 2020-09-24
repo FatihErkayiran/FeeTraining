@@ -2,6 +2,7 @@ package com.Management.feeTraining.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +11,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name="menus")
-
+@Table(name = "menus")
+@JsonIgnoreProperties(value= {"roles"})
 public class Menu {
 
     @Id
@@ -48,11 +49,8 @@ public class Menu {
     @JsonIgnore
     @JsonBackReference
     @ManyToOne()
-    @JoinColumn(name="role_id",nullable = false)
+    @JoinColumn(name = "role_id", nullable = false)
     private Role roles;
-
-
-
 
 
 }

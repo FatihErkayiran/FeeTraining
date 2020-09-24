@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<form th:action="@{/dologin}" method="post">
+    <div><label> User Name : <input type="text" name="username"/> </label></div>
+    <div><label> Password: <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="Sign In"/></div>
+</form>
+</body>
+</html>
+
+<!--<div class="panel-body">-->
+<!--    <form action="doLogin" method="post">-->
+<!--        <fieldset>-->
+<!--            <legend>Please sign in</legend>-->
+<!--            <c:if test="${not empty error}">-->
+<!--                <div class="alert alert-danger">-->
+<!--                    <spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/>-->
+<!--                    <br/>-->
+<!--                </div>-->
+<!--            </c:if>-->
+<!--            <div class="form-group">-->
+<!--                <input class="form:input-large" placeholder="User Name"-->
+<!--                       name='username' type="text">-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <input class=" form:input-large" placeholder="Password"-->
+<!--                       name='password' type="password" value="">-->
+<!--            </div>-->
+<!--            <input class="btn" type="submit"-->
+<!--                   value="Login">-->
+<!--        </fieldset>-->
+<!--    </form>-->
+<!--</div>-->

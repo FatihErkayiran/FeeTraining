@@ -2,17 +2,20 @@ package com.Management.feeTraining.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 import javax.persistence.*;
+
 
 import java.util.List;
 import java.util.Set;
 
 
 @Entity
-@Table(name="roles")
+@Table(name = "roles")
+//@JsonIgnoreProperties(value= {"user"})
 public class Role {
 
     @Id
@@ -47,13 +50,14 @@ public class Role {
         this.role_Name = role_Name;
     }
 
-//    @JsonIgnore
+
+    //    @JsonIgnore
 //    @JsonBackReference
 //    @OneToMany(mappedBy ="roles",cascade = CascadeType.ALL)
 //    @JoinTable(name="role_menus",
 //    joinColumns = @JoinColumn(name="role_id"),
 //    inverseJoinColumns = @JoinColumn(name = "menu_id"))
- //   private List<Menu> menus;
+    //   private List<Menu> menus;
 
 //    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 //    @JoinTable(name="role_menus",
@@ -62,6 +66,13 @@ public class Role {
 //    private List<Menu> menus;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "roles",cascade = CascadeType.ALL)
+    @OneToMany(fetch=FetchType.EAGER,mappedBy = "roles", cascade = CascadeType.ALL)
     private Set<Menu> menus;
+
+    @ManyToMany(fetch=FetchType.EAGER,mappedBy = "roles", cascade = CascadeType.ALL)
+    private List<User> users;
+
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "roles", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private Set<User> users;
 }

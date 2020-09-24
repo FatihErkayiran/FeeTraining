@@ -1,6 +1,7 @@
 package com.Management.feeTraining.Controllers;
 
 import com.Management.feeTraining.DA0.UserDao;
+import com.Management.feeTraining.DTO.UserDTO;
 import com.Management.feeTraining.Entities.User;
 import com.Management.feeTraining.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,39 +14,41 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-   private UserDao userDao;
+    private UserServices userServices;
 
-    @PostMapping()
-    public void addUser(@RequestBody  User user){
-        userDao.createUser(user);
+    @PostMapping("/")
+    public void addUser(@RequestBody UserDTO user) {
+        userServices.createUser(user);
     }
 
-   @GetMapping("{id}")
-    public User findUserById(@PathVariable("id") long id){
-        return userDao.findUserById(id);
+    @GetMapping("{id}")
+    public User findUserById(@PathVariable("id") long id) {
+        return userServices.findUserById(id);
     }
 
-    @GetMapping()
-    public List<User> getAllUser(){ return userDao.getAllUser(); }
-
-    @PutMapping()
-    public void updateUser(@RequestBody  User user){
-        userDao.updateUser(user);
+    @GetMapping("/get")
+    public List<User> getAllUser() {
+        return userServices.getAllUser();
     }
 
-    @DeleteMapping({"id"})
-    public void deleteUser(@PathVariable("id") long id){
-        userDao.deleteUser(id);
+    @PutMapping("/{id}")
+    public void updateUser(@PathVariable("id") long id, @RequestBody UserDTO user) {
+        userServices.updateUser(id, user);
     }
 
-    @GetMapping("/students")
-    public List<User> getAllStudents(){return userDao.getAllStudents();}
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") long id) {
+        userServices.deleteUser(id);
+    }
 
-    @GetMapping("/accountants")
-    public List<User> getAllAccountants(){return userDao.getAllAccountants();}
-
-    @GetMapping("/admin")
-    public List<User> getAdmin(){return userDao.getAdmin();}
+//    @GetMapping("/students")
+//    public List<User> getAllStudents(){return userDao.getAllStudents();}
+//
+//    @GetMapping("/accountants")
+//    public List<User> getAllAccountants(){return userDao.getAllAccountants();}
+//
+//    @GetMapping("/admin")
+//    public List<User> getAdmin(){return userDao.getAdmin();}
 }
 
 

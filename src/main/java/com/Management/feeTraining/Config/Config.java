@@ -15,6 +15,12 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class Config {
 
+
+    @Value("${hibernate.allow_update_outside_transaction}")
+    private String HIBERNATE_ALLOW_UPDATE;
+
+
+
     @Value("${db.driver}")
     private String Driver_Class_Name;
 
@@ -36,8 +42,15 @@ public class Config {
     @Value("${hibernate.hbm2ddl.auto}")
     private String HIBERNATE_HBM2DDL_AUTO;
 
+    //@Value("${hibernate.enable_lazy_load_no_trans}") 
+   // private String HIBERNATE_LAZY_LOAD_NO_TRANS; 
+
+
+
     @Value("${entitymanager.packagesToScan}")
     private String PACKAGES_TO_SCAN;
+
+
 
     @Bean
     public LocalSessionFactoryBean sessionFactoryBean(){
@@ -48,6 +61,7 @@ public class Config {
         hibernateProperties.put("hibernate.dialect",HIBERNATE_DIALECT);
         hibernateProperties.put("hibernate.show-sql",HIBERNATE_SHOW_SQL);
         hibernateProperties.put("hibernate.hbm2ddl.auto",HIBERNATE_HBM2DDL_AUTO);
+      //  hibernateProperties.put("hibernate.enable_lazy_load_no_trans", HIBERNATE_LAZY_LOAD_NO_TRANS); 
         sfb.setHibernateProperties(hibernateProperties);
         return sfb;
 
